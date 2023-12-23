@@ -1,4 +1,4 @@
-import {FlatFFT, fft32, ifft32} from "./index";
+import {FlatFFT32, FlatFFT64, fft32, ifft32, fft64, ifft64} from "./index";
 
 const round = function(arr){
     const res = [];
@@ -9,10 +9,20 @@ const round = function(arr){
 };
 
 test("Flat32: fft->ifft should give back the same input", ()=>{
-    const original = FlatFFT.toComplex([1,2,3,4]);
+    const original = FlatFFT32.toComplex([1,2,3,4]);
     expect(
         round(ifft32(fft32(original)))
     ).toStrictEqual(
         round(original)
     );
 });
+
+test("Flat64: fft->ifft should give back the same input", ()=>{
+    const original = FlatFFT64.toComplex([1,2,3,4]);
+    expect(
+        round(ifft64(fft64(original)))
+    ).toStrictEqual(
+        round(original)
+    );
+});
+
