@@ -78,3 +78,29 @@ export class FlatFFT{
         return res;
     }
 }
+
+export const createFFTGetter = function(FlatFFT){
+    const fftCache = new Map();
+    const getFFT = function(size){
+        const order = Math.round(Math.log(size)/Math.log(2));
+        let res;
+        if(!(res = fftCache.get(order))){
+            res = new FlatFFT(order);
+            fftCache.set(order,res);
+        }
+        return res;
+    };
+    
+    const fft = function(arr){
+        const transformer = getFFT(arr.length/2);
+        return transformer.fft(arr);
+    };
+    
+    const ifft = function(arr){
+        const transformer = getFFT(arr.length/2);
+        return transformer.ifft(arr);
+    };
+    return {fft,ifft};
+};
+
+export const {fft: fft32, ifft: ifft32} = createFFTGetter(FlatFFT);
