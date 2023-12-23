@@ -12,7 +12,7 @@ const FFT1024 = new FlatFFT(10);
 // Create a range of complex numbers as Float32Array.
 const original = FlatFFT.toComplex(new Array(1024).fill(0).map((v,i)=>i));
 // perform FFT
-const transformed = FFT1024.transform(original);
+const transformed = FFT1024.fft(original);
 // perform IFFT
 const reconstructed = FFT1024.ifft(transformed);
 
