@@ -7,7 +7,6 @@ export class FlatFFT{
         nummap[0] = 0;
         nummap[1] = 1;
         for(let i = 1; i < order; i++){
-            //console.log(JSON.stringify([...nummap]));
             let n = 1<<i;
             for(let j = n-1; j >= 0; j--){
                 nummap[j*2] = nummap[j];
@@ -16,7 +15,7 @@ export class FlatFFT{
         }
         this.nummap = nummap;
     }
-    transform(coefs){
+    baseTransform(coefs){
         const coefs64 = new Float64Array(coefs.buffer);
         const {nummap,order} = this;
         const n = this.length;
@@ -52,6 +51,11 @@ export class FlatFFT{
                 }
             }
         }
+        return buff;
+    }
+    fft(coefs){
+        const buff = this.baseTransform(coefs);
+        const n = this.length;
         //taking the complex conjugate
         for(let i = 1; i < n*2; i += 2){
             buff[i] = -buff[i];
@@ -59,12 +63,12 @@ export class FlatFFT{
         return buff;
     }
     ifft(coefs){
+        const buff = this.baseTransform(coefs);
         const n = this.length;
-        const res = this.transform(coefs);
-        for(let i = 0; i < n; i++){
-            res[i] = res[i]/n;
+        for(let i = 0; i < n*2; i++){
+            buff[i] = buff[i]/n;
         }
-        return res;
+        return buff;
     }
     static toComplex(arr){
         const res = new Float32Array(arr.length*2);
