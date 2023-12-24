@@ -4,6 +4,7 @@ export class FlatFFT32{
     fft(coefs: Float32Array): Float32Array;
     ifft(coefs: Float32Array): Float32Array;
     static toComplex(arr: number[]): Float32Array;
+    static toReal(arr: number[]): Float32Array;
 }
 
 export class FlatFFT64{
@@ -12,6 +13,7 @@ export class FlatFFT64{
     fft(coefs: Float64Array): Float64Array;
     ifft(coefs: Float64Array): Float64Array;
     static toComplex(arr: number[]): Float64Array;
+    static toReal(arr: number[]): Float64Array;
 }
 
 // Util functions

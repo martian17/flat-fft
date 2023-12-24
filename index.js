@@ -77,6 +77,13 @@ export class FlatFFT32{
         }
         return res;
     }
+    static toReal(arr){
+        const res = new Float32Array(arr.length/2);
+        for(let i = 0; i < arr.length/2; i++){
+            res[i] = arr[i*2];
+        }
+        return res;
+    }
 }
 
 export class FlatFFT64 extends FlatFFT32{
@@ -121,6 +128,13 @@ export class FlatFFT64 extends FlatFFT32{
         const res = new Float64Array(arr.length*2);
         for(let i = 0; i < arr.length; i++){
             res[i*2] = arr[i];
+        }
+        return res;
+    }
+    static toReal(arr){
+        const res = new Float64Array(arr.length/2);
+        for(let i = 0; i < arr.length/2; i++){
+            res[i] = arr[i*2];
         }
         return res;
     }
