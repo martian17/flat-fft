@@ -16,22 +16,13 @@ export class FlatFFT64{
     static toReal(arr: numbers): Float64Array;
 }
 
-export type numbers = number[]
-                    | Int8Array
-                    | Uint8Array
-                    | Uint8ClampedArray
-                    | Int16Array
-                    | Uint16Array
-                    | Int32Array
-                    | Uint32Array
-                    | Float32Array
-                    | Float64Array;
+export type numbers = ArrayLike<number>;
 
 // Util functions
-export declare const fft32(arr: Float32Array): Float32Array;
-export declare const ifft32(arr: Float32Array): Float32Array;
-export declare const fft64(arr: Float64Array): Float64Array;
-export declare const ifft64(arr: Float64Array): Float64Array;
+export declare function fft32(arr: Float32Array): Float32Array;
+export declare function ifft32(arr: Float32Array): Float32Array;
+export declare function fft64(arr: Float64Array): Float64Array;
+export declare function ifft64(arr: Float64Array): Float64Array;
 
 // Alias to FlatFFT32
 export declare const FlatFFT: FlatFFT32
