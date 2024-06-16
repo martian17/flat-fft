@@ -1,11 +1,11 @@
 {
   "name": "flat-fft",
   "type": "module",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":"node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -14,7 +14,7 @@
   "keywords": [],
   "author": "Yutaro Yoshii",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "jest": "^29.7.0"
   }
 }
