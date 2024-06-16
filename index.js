@@ -15,11 +15,11 @@ export class FlatFFT32{
         }
         this.nummap = nummap;
     }
-    baseTransform(coefs){
+    baseTransform(coefs, returnBuffer){
         const coefs64 = new Float64Array(coefs.buffer);
         const {nummap,order} = this;
         const n = this.length;
-        const buff = new Float32Array(n*2);
+        const buff = returnBuffer || new Float32Array(n*2);
         const buff64 = new Float64Array(buff.buffer);
         for(let i = 0; i < n; i++){
             let idx = nummap[i];
@@ -53,8 +53,8 @@ export class FlatFFT32{
         }
         return buff;
     }
-    fft(coefs){
-        const buff = this.baseTransform(coefs);
+    fft(coefs, returnBuffer){
+        const buff = this.baseTransform(coefs, returnBuffer);
         const n = this.length;
         //taking the complex conjugate
         for(let i = 1; i < n*2; i += 2){
@@ -62,8 +62,8 @@ export class FlatFFT32{
         }
         return buff;
     }
-    ifft(coefs){
-        const buff = this.baseTransform(coefs);
+    ifft(coefs, returnBuffer){
+        const buff = this.baseTransform(coefs, returnBuffer);
         const n = this.length;
         for(let i = 0; i < n*2; i++){
             buff[i] = buff[i]/n;
@@ -87,10 +87,10 @@ export class FlatFFT32{
 }
 
 export class FlatFFT64 extends FlatFFT32{
-    baseTransform(coefs){
+    baseTransform(coefs, returnBuffer){
         const {nummap,order} = this;
         const n = this.length;
-        const buff = new Float64Array(n*2);
+        const buff = returnBuffer || new Float64Array(n*2);
         for(let i = 0; i < n; i++){
             let idx = nummap[i];
             //copying the real and imaginary together as 64 bit double
@@ -165,5 +165,6 @@ export const createFFTGetter = function(FlatFFT){
 };
 
 export const {fft: fft32, ifft: ifft32} = createFFTGetter(FlatFFT32);
+export const {fft, ifft} = createFFTGetter(FlatFFT64);
 export const {fft: fft64, ifft: ifft64} = createFFTGetter(FlatFFT64);
 export const FlatFFT = FlatFFT32;
