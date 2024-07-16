@@ -106,8 +106,10 @@ export class FlatFFT32{
     ifft(coefs, returnBuffer){
         const buff = this.baseTransform(coefs, returnBuffer);
         const n = this.length;
-        for(let i = 0; i < n*2; i++){
+        for(let i = 0; i < n*2; i += 2){
             buff[i] = buff[i]/n;
+            //taking the complex conjugate
+            buff[i] = -buff[i]/n;
         }
         return buff;
     }
@@ -123,8 +125,10 @@ export class FlatFFT32{
     ifftInPlace(coefs){
         this.baseInPlaceTransform(coefs);
         const n = this.length;
-        for(let i = 0; i < n*2; i++){
+        for(let i = 0; i < n*2; i += 2){
             coefs[i] = coefs[i]/n;
+            //taking the complex conjugate
+            coefs[i] = -coefs[i]/n;
         }
         return coefs;
     }
