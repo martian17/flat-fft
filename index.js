@@ -109,7 +109,7 @@ export class FlatFFT32{
         for(let i = 0; i < n*2; i += 2){
             buff[i] = buff[i]/n;
             //taking the complex conjugate
-            buff[i] = -buff[i]/n;
+            buff[i+1] = -buff[i+1]/n;
         }
         return buff;
     }
@@ -128,7 +128,7 @@ export class FlatFFT32{
         for(let i = 0; i < n*2; i += 2){
             coefs[i] = coefs[i]/n;
             //taking the complex conjugate
-            coefs[i] = -coefs[i]/n;
+            coefs[i+1] = -coefs[i+1]/n;
         }
         return coefs;
     }
